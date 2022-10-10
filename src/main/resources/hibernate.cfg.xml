@@ -4,11 +4,16 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-        <property name="connection.url">jdbc:postgresql://localhost:5432/postgres</property>
+        <property name="connection.url">jdbc:postgresql://localhost:5434/hibernate_base</property>
         <property name="connection.username">postgres</property>
         <property name="connection.password">postgres</property>
         <property name="connection.driver_class">org.postgresql.Driver</property>
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <property name="show_sql">true</property>
+        <property name="format_sql">true</property>
+
+        <!--В строке ниже мы можем указывать маппинг на класс, однако лучше это делать в configuration при настройке подключения-->
+        <!--        <mapping class="com.lirik.entity.User"/>-->
 
 
         <!-- DB schema will be updated if needed -->
