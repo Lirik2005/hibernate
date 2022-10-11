@@ -1,5 +1,6 @@
 package com.lirik;
 
+import com.lirik.entity.Role;
 import com.lirik.entity.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -35,6 +36,7 @@ public class HibernateRunner {
                             .lastName("Ivanov")
                             .birthDate(LocalDate.of(2000, 1, 19))
                             .age(22)
+                            .role(Role.ADMIN)
                             .build();
             session.persist(user);
 

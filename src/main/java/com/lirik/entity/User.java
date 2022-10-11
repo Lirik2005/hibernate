@@ -1,5 +1,7 @@
 package com.lirik.entity;
 
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -32,6 +34,10 @@ public class User {
      * аннотация @Id
      * Если название колонок в таблице отличается от названия полей (присутствует CamelCase или Snake_case), то необходимо указать
      * маппинг на колонки с помощью аннотации @Column и в ней указать название колонки как в таблице
+     * Аннотация @Enumerated нужна для работы с Enum. Если указать @Enumerated(EnumType.STRING), то из Enum мы будем получать
+     * соответствующее имя. Если указать @Enumerated(EnumType.ORDINAL), то будем получать порядковый номер поля из Enum и этот параметр
+     * установлен ПО УМОЛЧАНИЮ!!!
+     *
      */
 
     @Id
@@ -45,4 +51,6 @@ public class User {
     private LocalDate birthDate;
     @Column(name = "age")
     private Integer age;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 }
