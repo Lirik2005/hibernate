@@ -20,11 +20,6 @@ class HibernateRunnerTest {
     @Test
     void checkReflectionApi() {
         User user = User.builder()
-                        .userName("ivan@gmail.com")
-                        .firstName("Ivan")
-                        .lastName("Ivanov")
-                        .birthDate(LocalDate.of(2000, 1, 19))
-                        .age(22)
                         .build();
 
         String sql = """

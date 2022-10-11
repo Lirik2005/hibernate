@@ -1,5 +1,7 @@
 package com.lirik.entity;
 
+import com.lirik.converter.BirthdayConverter;
+import jakarta.persistence.Convert;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.AllArgsConstructor;
@@ -47,10 +49,10 @@ public class User {
     private String firstName;
     @Column(name = "lastname")
     private String lastName;
+
+    @Convert(converter = BirthdayConverter.class) // С этой аннотацией Hibernate знает как использовать класс Birthday
     @Column(name = "birth_date")
-    private LocalDate birthDate;
-    @Column(name = "age")
-    private Integer age;
+    private Birthday birthDate;  // В таком виде SQL не знает как работать с этим полем и нам нужен кастомный конвертер!!!
     @Enumerated(EnumType.STRING)
     private Role role;
 }

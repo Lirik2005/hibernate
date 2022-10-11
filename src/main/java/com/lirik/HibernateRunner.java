@@ -1,5 +1,7 @@
 package com.lirik;
 
+import com.lirik.converter.BirthdayConverter;
+import com.lirik.entity.Birthday;
 import com.lirik.entity.Role;
 import com.lirik.entity.User;
 import org.hibernate.Session;
@@ -24,6 +26,13 @@ public class HibernateRunner {
          */
 
         configuration.addAnnotatedClass(User.class);
+
+        /**
+         * Запись ниже используется чтобы избавится от аннотации @Convert(converter = BirthdayConverter.class) в нашей Entity, если
+         * подобный конвертер используется в большом количестве сущностей
+         */
+
+        // configuration.addAttributeConverter(new BirthdayConverter(), true);
         configuration.configure();
 
         try (SessionFactory sessionFactory = configuration.buildSessionFactory();
@@ -34,8 +43,7 @@ public class HibernateRunner {
                             .userName("ivan@gmail.com")
                             .firstName("Ivan")
                             .lastName("Ivanov")
-                            .birthDate(LocalDate.of(2000, 1, 19))
-                            .age(22)
+                            .birthDate(new Birthday(LocalDate.of(2000, 1, 19)))
                             .role(Role.ADMIN)
                             .build();
             session.persist(user);
