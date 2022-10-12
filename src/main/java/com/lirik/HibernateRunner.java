@@ -1,6 +1,5 @@
 package com.lirik;
 
-import com.lirik.converter.BirthdayConverter;
 import com.lirik.entity.Birthday;
 import com.lirik.entity.Role;
 import com.lirik.entity.User;
@@ -33,6 +32,7 @@ public class HibernateRunner {
          */
 
         // configuration.addAttributeConverter(new BirthdayConverter(), true);
+
         configuration.configure();
 
         try (SessionFactory sessionFactory = configuration.buildSessionFactory();
@@ -43,6 +43,12 @@ public class HibernateRunner {
                             .userName("ivan@gmail.com")
                             .firstName("Ivan")
                             .lastName("Ivanov")
+                            .info("""
+                                          {
+                                          "name": "Ivan",
+                                          "id": 25
+                                          }
+                                          """)
                             .birthDate(new Birthday(LocalDate.of(2000, 1, 19)))
                             .role(Role.ADMIN)
                             .build();

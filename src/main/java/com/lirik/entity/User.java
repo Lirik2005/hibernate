@@ -1,20 +1,19 @@
 package com.lirik.entity;
 
 import com.lirik.converter.BirthdayConverter;
+import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
+import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.Column;
-
-import java.time.LocalDate;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 @Data
 @NoArgsConstructor
@@ -39,7 +38,6 @@ public class User {
      * Аннотация @Enumerated нужна для работы с Enum. Если указать @Enumerated(EnumType.STRING), то из Enum мы будем получать
      * соответствующее имя. Если указать @Enumerated(EnumType.ORDINAL), то будем получать порядковый номер поля из Enum и этот параметр
      * установлен ПО УМОЛЧАНИЮ!!!
-     *
      */
 
     @Id
@@ -55,4 +53,12 @@ public class User {
     private Birthday birthDate;  // В таком виде SQL не знает как работать с этим полем и нам нужен кастомный конвертер!!!
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    /**
+     * Аннотация ниже позволяет создать свой собственный кастомный тип. В данном случае String будет приводиться к формату JSON, однако
+     * для корректной работы необходима зависимость для парсинга JSON (например библиотека Jackson)
+     */
+
+    @JdbcTypeCode(SqlTypes.JSON)
+    private String info;
 }
