@@ -25,7 +25,7 @@ public class BirthdayConverter implements AttributeConverter<Birthday, Date> {
     public Birthday convertToEntityAttribute(Date dbData) {
         return Optional.ofNullable(dbData)
                        .map(date -> date.toLocalDate())
-                       .map(birthday -> new Birthday())
+                       .map(birthday -> new Birthday(birthday))
                        .orElse(null);
     }
 }

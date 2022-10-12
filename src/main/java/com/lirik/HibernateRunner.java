@@ -1,5 +1,6 @@
 package com.lirik;
 
+import com.lirik.converter.BirthdayConverter;
 import com.lirik.entity.Birthday;
 import com.lirik.entity.Role;
 import com.lirik.entity.User;
@@ -31,7 +32,7 @@ public class HibernateRunner {
          * подобный конвертер используется в большом количестве сущностей
          */
 
-        // configuration.addAttributeConverter(new BirthdayConverter(), true);
+//         configuration.addAttributeConverter(new BirthdayConverter(), true);
 
         configuration.configure();
 
@@ -52,9 +53,18 @@ public class HibernateRunner {
                             .birthDate(new Birthday(LocalDate.of(2000, 1, 19)))
                             .role(Role.ADMIN)
                             .build();
-            session.persist(user);
 
+            /**
+             * Операции persist, merge, remove осуществляются по id юзера
+             */
+
+//             session.persist(user);  // Добавляет пользователя в базу данных
+//              session.merge(user);  // Делает update юзера в БД. Если в БД такого юзера нет, то метод его туда запишет (saveOrUpdate)
+//              session.remove(user); // Удаляет юзера из БД
+            User userFromDb = session.get(User.class, "ivan@gmail.com");// Получаем из БД соответствующего юзера
             session.getTransaction().commit(); // обязательно закрываем транзакцию ВРУЧНУЮ после выполнения необходимого кода
         }
+
+
     }
 }
