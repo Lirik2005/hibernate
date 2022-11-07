@@ -1,6 +1,7 @@
 package com.lirik;
 
 import com.lirik.entity.Birthday;
+import com.lirik.entity.PersonalInfo;
 import com.lirik.entity.Role;
 import com.lirik.entity.User;
 import org.hibernate.Session;
@@ -41,15 +42,17 @@ public class HibernateRunner {
 
             User user = User.builder()
                             .userName("ivan@gmail.com")
-                            .firstName("Ivan")
-                            .lastName("Ivanov")
+                            .personalInfo(PersonalInfo.builder()
+                                                      .lastName("Ivanov")
+                                                      .firstName("Ivan")
+                                                      .birthDate(new Birthday(LocalDate.of(2000, 1, 19)))
+                                                      .build())
                             .info("""
                                           {
                                           "name": "Ivan",
                                           "id": 25
                                           }
                                           """)
-                            .birthDate(new Birthday(LocalDate.of(2000, 1, 19)))
                             .role(Role.ADMIN)
                             .build();
 

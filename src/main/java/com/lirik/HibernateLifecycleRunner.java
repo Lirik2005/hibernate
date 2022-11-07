@@ -1,5 +1,6 @@
 package com.lirik;
 
+import com.lirik.entity.PersonalInfo;
 import com.lirik.entity.User;
 import com.lirik.util.HibernateUtil;
 import org.hibernate.Session;
@@ -10,9 +11,11 @@ public class HibernateLifecycleRunner {
     public static void main(String[] args) {
 
         User user = User.builder()  // В данной строке user не связан ни с одной из сессий и находится в состоянии transient
-                        .userName("ivan@gmail.com")
-                        .lastName("Ivanov")
-                        .firstName("Ivan")
+                        .userName("petr@gmail.com")
+                        .personalInfo(PersonalInfo.builder()
+                                                  .lastName("Petrov")
+                                                  .firstName("Petr")
+                                                  .build())
                         .build();
 
         /**

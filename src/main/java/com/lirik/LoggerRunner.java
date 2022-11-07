@@ -21,8 +21,6 @@ public class LoggerRunner {
 
         User user = User.builder()
                         .userName("ivan@gmail.com")
-                        .lastName("Ivanov")
-                        .firstName("Ivan")
                         .build();
 
         /**

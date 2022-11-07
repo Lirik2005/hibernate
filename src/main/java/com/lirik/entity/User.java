@@ -1,8 +1,11 @@
 package com.lirik.entity;
 
 import com.lirik.converter.BirthdayConverter;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
 import jakarta.persistence.Convert;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -43,14 +46,30 @@ public class User {
     @Id
     @Column(name = "username")
     private String userName;
-    @Column(name = "firstname")
-    private String firstName;
-    @Column(name = "lastname")
-    private String lastName;
 
-    @Convert(converter = BirthdayConverter.class) // С этой аннотацией Hibernate знает как использовать класс Birthday
-    @Column(name = "birth_date")
-    private Birthday birthDate;  // В таком виде SQL не знает как работать с этим полем и нам нужен кастомный конвертер!!!
+    /**
+     * Задокументированный код (поля и их аннотации) переехали в новы класс PersonalInfo для дальнейшей настройки юзера!!!
+     */
+
+//    @Column(name = "firstname")
+//    private String firstName;
+//    @Column(name = "lastname")
+//    private String lastName;
+//
+//    @Convert(converter = BirthdayConverter.class) // С этой аннотацией Hibernate знает как использовать класс Birthday
+//    @Column(name = "birth_date")
+//    private Birthday birthDate;  // В таком виде SQL не знает как работать с этим полем и нам нужен кастомный конвертер!!!
+
+    /**
+     * Аннотация @AttributeOverride позволяет связать наш встраиваемый компонент с нашей сущностью и установить соответствие названий полей
+     * сущности с названиями колонок в таблице
+     */
+
+    @AttributeOverride(name = "firstName", column = @Column(name = "firstname"))
+    @AttributeOverride(name = "lastName", column = @Column(name = "lastname"))
+    @AttributeOverride(name = "birthDate", column = @Column(name = "birth_date"))
+    private PersonalInfo personalInfo;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
