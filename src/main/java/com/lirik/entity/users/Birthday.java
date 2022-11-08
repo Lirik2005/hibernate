@@ -1,4 +1,4 @@
-package com.lirik.entity;
+package com.lirik.entity.users;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

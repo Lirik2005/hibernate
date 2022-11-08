@@ -1,9 +1,9 @@
 package com.lirik;
 
-import com.lirik.entity.Birthday;
-import com.lirik.entity.PersonalInfo;
-import com.lirik.entity.Role;
-import com.lirik.entity.User;
+import com.lirik.entity.users.Birthday;
+import com.lirik.entity.users.PersonalInfo;
+import com.lirik.entity.users.Role;
+import com.lirik.entity.users.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

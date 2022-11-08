@@ -1,14 +1,14 @@
-package com.lirik.entity;
+package com.lirik.entity.users;
 
-import com.lirik.converter.BirthdayConverter;
+import com.lirik.entity.users.PersonalInfo;
+import com.lirik.entity.users.Role;
 import jakarta.persistence.AttributeOverride;
-import jakarta.persistence.AttributeOverrides;
 import jakarta.persistence.Column;
-import jakarta.persistence.Convert;
-import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -44,7 +44,21 @@ public class User {
      */
 
     @Id
-    @Column(name = "username")
+
+    /**
+     * Аннотация @GeneratedValue нужна для генерации id и чтобы сказать hibernate, чтобы он не вставлял поле id в базу данных (иначе он
+     * будет требовать, чтобы id был не null.
+     * Есть несколько стратегий генерации id:
+     * - GenerationType.AUTO - использует IDENTITY, SEQUENCE или TABLE. Зависит от СУБД и диалекта. У Postgres SQL это IDENTITY
+     * - GenerationType.IDENTITY - используется практически всегда и имеет максимальный приоритет перед всеми остальными стратегиями
+     * - GenerationType.SEQUENCE - аналог счетчика, который увеличивается на 1 при каждом вызове
+     * - GenerationType.TABLE - жуткое legacy, которое использовали до создания IDENTITY и SEQUENCE
+     */
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+
+    @Column(name = "username", unique = true)
     private String userName;
 
     /**

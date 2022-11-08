@@ -1,7 +1,7 @@
-package com.lirik.entity;
+package com.lirik.entity.users;
 
 import com.lirik.converter.BirthdayConverter;
-import jakarta.persistence.Column;
+import com.lirik.entity.users.Birthday;
 import jakarta.persistence.Convert;
 import jakarta.persistence.Embeddable;
 import lombok.AllArgsConstructor;

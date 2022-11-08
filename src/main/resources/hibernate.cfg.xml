@@ -13,7 +13,7 @@
         <property name="format_sql">true</property>
 
         <!--В строке ниже мы можем указывать маппинг на класс, однако лучше это делать в configuration при настройке подключения-->
-        <!--        <mapping class="com.lirik.entity.User"/>-->
+        <!--        <mapping class="com.lirik.entity.users.User"/>-->
 
 
         <!-- DB schema will be updated if needed -->

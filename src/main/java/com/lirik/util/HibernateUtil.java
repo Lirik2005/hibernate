@@ -1,6 +1,6 @@
 package com.lirik.util;
 
-import com.lirik.entity.User;
+import com.lirik.entity.users.User;
 import lombok.experimental.UtilityClass;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

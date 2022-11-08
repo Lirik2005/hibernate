@@ -1,6 +1,6 @@
 package com.lirik.converter;
 
-import com.lirik.entity.Birthday;
+import com.lirik.entity.users.Birthday;
 import jakarta.persistence.AttributeConverter;
 
 import java.sql.Date;

@@ -1,6 +1,6 @@
 package com.lirik;
 
-import com.lirik.entity.User;
+import com.lirik.entity.users.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Table;
 import lombok.SneakyThrows;
@@ -9,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import java.lang.reflect.Field;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Optional;
 import java.util.stream.Collectors;
