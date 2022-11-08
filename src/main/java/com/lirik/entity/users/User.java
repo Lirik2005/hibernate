@@ -1,5 +1,6 @@
 package com.lirik.entity.users;
 
+import com.lirik.entity.companies.Company;
 import com.lirik.entity.users.PersonalInfo;
 import com.lirik.entity.users.Role;
 import jakarta.persistence.AttributeOverride;
@@ -10,6 +11,8 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -27,6 +30,8 @@ import org.hibernate.type.SqlTypes;
  * Аннотация @Entity необходима для того, чтобы указать, что данный POJO-класс является сущностью Hibernate
  * Т. к. название класса (User) отличается от названия таблицы (users), необходимо добавить @Table и указать название таблицы для данной
  * Entity
+ *
+ * Также данный класс должен быть указан в файле hibernate.cfg.xml или в классе HibernateUtil
  */
 
 @Entity
@@ -94,4 +99,8 @@ public class User {
 
     @JdbcTypeCode(SqlTypes.JSON)
     private String info;
+
+    @ManyToOne  // Данная аннотация нужна для маппинга вида: много юзеров к одной компании
+    @JoinColumn(name = "company_id") // Эта аннотация используется, чтобы указать по какой колонке идет маппинг
+    private Company company;
 }

@@ -14,6 +14,7 @@
 
         <!--В строке ниже мы можем указывать маппинг на класс, однако лучше это делать в configuration при настройке подключения-->
         <!--        <mapping class="com.lirik.entity.users.User"/>-->
+        <!--        <mapping class="com.lirik.entity.users.Company"/>-->
 
 
         <!-- DB schema will be updated if needed -->

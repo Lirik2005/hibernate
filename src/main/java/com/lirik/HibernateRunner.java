@@ -1,5 +1,6 @@
 package com.lirik;
 
+import com.lirik.entity.companies.Company;
 import com.lirik.entity.users.Birthday;
 import com.lirik.entity.users.PersonalInfo;
 import com.lirik.entity.users.Role;
@@ -26,6 +27,7 @@ public class HibernateRunner {
          */
 
         configuration.addAnnotatedClass(User.class);
+        configuration.addAnnotatedClass(Company.class);
 
         /**
          * Запись ниже используется чтобы избавится от аннотации @Convert(converter = BirthdayConverter.class) в нашей Entity, если
