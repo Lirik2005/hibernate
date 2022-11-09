@@ -8,6 +8,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -100,7 +101,13 @@ public class User {
     @JdbcTypeCode(SqlTypes.JSON)
     private String info;
 
-    @ManyToOne  // Данная аннотация нужна для маппинга вида: много юзеров к одной компании
+    /**
+     * Аннотация @ManyToOne (Many относится к users, а One относится к Company) нужна для маппинга вида: много юзеров к одной компании.
+     * Параметр optional = false позволяет нам сделать inner join. Параметр fetch = FetchType.LAZY это ленивая инициализация и
+     * используется для того, чтобы инициализировать сущность Company, тогда, когда мы попросим ее поля (т.е. используется Hibernate proxy)
+     */
+
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id") // Эта аннотация используется, чтобы указать по какой колонке идет маппинг
     private Company company;
 }
