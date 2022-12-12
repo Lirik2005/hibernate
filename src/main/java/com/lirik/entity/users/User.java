@@ -14,16 +14,19 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
 @Data
 @NoArgsConstructor
+@ToString(exclude = {"company", "profile"})
 @AllArgsConstructor
 @Builder
 
@@ -107,7 +110,10 @@ public class User {
      * используется для того, чтобы инициализировать сущность Company, тогда, когда мы попросим ее поля (т.е. используется Hibernate proxy)
      */
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_id") // Эта аннотация используется, чтобы указать по какой колонке идет маппинг
     private Company company;
+
+    @OneToOne(mappedBy = "userForMapping")
+    private Profile profile;
 }

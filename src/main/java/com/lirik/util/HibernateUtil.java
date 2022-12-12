@@ -1,6 +1,7 @@
 package com.lirik.util;
 
 import com.lirik.entity.companies.Company;
+import com.lirik.entity.users.Profile;
 import com.lirik.entity.users.User;
 import lombok.experimental.UtilityClass;
 import org.hibernate.SessionFactory;
@@ -18,6 +19,7 @@ public class HibernateUtil {
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(User.class);
         configuration.addAnnotatedClass(Company.class);
+        configuration.addAnnotatedClass(Profile.class);
         configuration.configure();
 
         return configuration.buildSessionFactory();
