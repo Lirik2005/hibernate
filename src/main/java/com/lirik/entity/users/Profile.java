@@ -1,10 +1,11 @@
 package com.lirik.entity.users;
 
-import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToOne;
-import jakarta.persistence.PrimaryKeyJoinColumn;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,12 +19,11 @@ import lombok.NoArgsConstructor;
 public class Profile {
 
     @Id
-    @Column(name = "user_Id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @OneToOne
-//    @JoinColumn(name = "user_id") // Можно сослаться на таблицу Users вот так
-    @PrimaryKeyJoinColumn  // А можно и так
+    @JoinColumn(name = "user_id") // Можно сослаться на таблицу Users вот так
     private User userForMapping;
 
     private String street;
@@ -31,7 +31,7 @@ public class Profile {
     private String language;
 
     public void setUser(User user) {
-        this.userForMapping = user;
-        this.id = user.getId();
+        user.setProfile(this);
+        this.userForMapping=user;
     }
 }

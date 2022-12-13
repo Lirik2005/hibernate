@@ -17,17 +17,16 @@ public class OneToOneTest {
         session.beginTransaction();
 
         User user = User.builder()
-                        .userName("test23@gmail.com")
+                        .userName("test24@gmail.com")
                         .build();
-
 
         Profile profile = Profile.builder()
                                  .language("ru")
                                  .street("Street, 12")
                                  .build();
-        session.persist(user);
         profile.setUser(user);
-        session.persist(profile);
+
+        session.persist(user);
         session.getTransaction().commit();
     }
 
@@ -37,7 +36,7 @@ public class OneToOneTest {
         @Cleanup Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        User user = session.get(User.class, 4L);
+        User user = session.get(User.class, 8L);
         System.out.println(user);
 
         session.getTransaction().commit();

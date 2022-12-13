@@ -4,6 +4,7 @@ import com.lirik.entity.companies.Company;
 import com.lirik.entity.users.PersonalInfo;
 import com.lirik.entity.users.Role;
 import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -114,6 +115,6 @@ public class User {
     @JoinColumn(name = "company_id") // Эта аннотация используется, чтобы указать по какой колонке идет маппинг
     private Company company;
 
-    @OneToOne(mappedBy = "userForMapping")
+    @OneToOne(mappedBy = "userForMapping", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false )
     private Profile profile;
 }
