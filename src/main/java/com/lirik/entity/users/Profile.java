@@ -10,10 +10,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString(exclude = "userForMapping")
 @Builder
 @Entity
 public class Profile {
@@ -32,6 +34,6 @@ public class Profile {
 
     public void setUser(User user) {
         user.setProfile(this);
-        this.userForMapping=user;
+        this.userForMapping = user;
     }
 }

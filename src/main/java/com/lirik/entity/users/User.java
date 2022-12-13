@@ -1,8 +1,7 @@
 package com.lirik.entity.users;
 
+import com.lirik.entity.chat.UserChat;
 import com.lirik.entity.companies.Company;
-import com.lirik.entity.users.PersonalInfo;
-import com.lirik.entity.users.Role;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -15,19 +14,25 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Data
 @NoArgsConstructor
-@ToString(exclude = {"company", "profile"})
+@EqualsAndHashCode(of = "userName")
+@ToString(exclude = {"company", "profile", "userChats"})
 @AllArgsConstructor
 @Builder
 
@@ -115,6 +120,10 @@ public class User {
     @JoinColumn(name = "company_id") // Эта аннотация используется, чтобы указать по какой колонке идет маппинг
     private Company company;
 
-    @OneToOne(mappedBy = "userForMapping", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false )
+    @OneToOne(mappedBy = "userForMapping", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
     private Profile profile;
+
+    @Builder.Default
+    @OneToMany(mappedBy = "user")
+    private Set<UserChat> userChats = new HashSet<>();
 }

@@ -1,5 +1,7 @@
 package com.lirik.util;
 
+import com.lirik.entity.chat.Chat;
+import com.lirik.entity.chat.UserChat;
 import com.lirik.entity.companies.Company;
 import com.lirik.entity.users.Profile;
 import com.lirik.entity.users.User;
@@ -20,6 +22,8 @@ public class HibernateUtil {
         configuration.addAnnotatedClass(User.class);
         configuration.addAnnotatedClass(Company.class);
         configuration.addAnnotatedClass(Profile.class);
+        configuration.addAnnotatedClass(Chat.class);
+        configuration.addAnnotatedClass(UserChat.class);
         configuration.configure();
 
         return configuration.buildSessionFactory();
