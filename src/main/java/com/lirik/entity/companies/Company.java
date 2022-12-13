@@ -2,7 +2,9 @@ package com.lirik.entity.companies;
 
 import com.lirik.entity.users.User;
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -47,6 +49,11 @@ public class Company {
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
 //    @JoinColumn(name = "company_id")
     private List<User> users = new ArrayList<>();
+
+    @Builder.Default
+    @ElementCollection // Необходима для эмбедбл компонентов
+    @CollectionTable(name = "company_locale")
+    private List<LocaleInfo> locales = new ArrayList<>();
 
     public void addUser(User user) {
         users.add(user);
