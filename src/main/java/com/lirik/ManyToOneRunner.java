@@ -15,14 +15,14 @@ public class ManyToOneRunner {
     public static void main(String[] args) {
 
         Company google = Company.builder()
-                                .name("Google")
+                                .name("Googleedse")
                                 .build();
 
         User petr = User.builder()
-                        .userName("petr@gmail.com")
+                        .userName("petr@gsdmailsds.com")
                         .personalInfo(PersonalInfo.builder()
-                                                  .lastName("Petrov")
-                                                  .firstName("Petr")
+                                                  .lastName("Petrodsvddd")
+                                                  .firstName("Pesdftrsd")
                                                   .birthDate(new Birthday(LocalDate.of(2009, 3, 16)))
                                                   .build())
                         .company(google)

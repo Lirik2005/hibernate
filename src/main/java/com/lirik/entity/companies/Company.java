@@ -9,14 +9,21 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.MapKey;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OrderBy;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SortComparator;
+import org.hibernate.annotations.SortNatural;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * Также данный класс должен быть указан в файле hibernate.cfg.xml или в классе HibernateUtil
@@ -48,7 +55,10 @@ public class Company {
     @Builder.Default
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
 //    @JoinColumn(name = "company_id")
-    private List<User> users = new ArrayList<>();
+//    @OrderBy("userName desc,  personalInfo.lastName asc")   //данная аннотация используется для сортировки
+    @MapKey(name = "userName") //  Необходима, чтобы указать, какое поле будет ключом
+    @SortNatural // сортирует мапу по ключу
+    private Map<String, User> users = new TreeMap<>();
 
     @Builder.Default
     @ElementCollection // Необходима для эмбедбл компонентов
@@ -56,7 +66,7 @@ public class Company {
     private List<LocaleInfo> locales = new ArrayList<>();
 
     public void addUser(User user) {
-        users.add(user);
+        users.put(user.getUserName(), user);
         user.setCompany(this);
     }
 }

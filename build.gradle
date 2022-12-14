@@ -32,6 +32,10 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
 
     implementation 'org.slf4j:slf4j-log4j12:2.0.3' // внутри есть транзитивная зависимость на slf4j, поэтому зависимость slf4j не нужна
+
+//    testImplementation 'com.h2database:h2:2.1.214' // данная зависимость нужна для создания подобия виртуальной базы (нам не надо СУБД)
+
+    testImplementation 'org.testcontainers:postgresql:1.17.6' // нужна чтобы поднять базу в докере
 }
 
 test {

@@ -18,14 +18,19 @@ public class HibernateUtil {
          * Что такое Configuration и SessionFactory можно посмотреть в комментариях в моем классе HibernateRunner
          */
 
+        Configuration configuration = buldConfiguration();
+        configuration.configure();
+
+        return configuration.buildSessionFactory();
+    }
+
+    public static Configuration buldConfiguration() {
         Configuration configuration = new Configuration();
         configuration.addAnnotatedClass(User.class);
         configuration.addAnnotatedClass(Company.class);
         configuration.addAnnotatedClass(Profile.class);
         configuration.addAnnotatedClass(Chat.class);
         configuration.addAnnotatedClass(UserChat.class);
-        configuration.configure();
-
-        return configuration.buildSessionFactory();
+        return configuration;
     }
 }
