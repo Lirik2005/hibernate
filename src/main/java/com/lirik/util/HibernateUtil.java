@@ -5,6 +5,8 @@ import com.lirik.entity.chat.UserChat;
 import com.lirik.entity.companies.Company;
 import com.lirik.entity.users.Profile;
 import com.lirik.entity.users.User;
+import com.lirik.mapping.Manager;
+import com.lirik.mapping.Programmer;
 import lombok.experimental.UtilityClass;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
@@ -31,6 +33,8 @@ public class HibernateUtil {
         configuration.addAnnotatedClass(Profile.class);
         configuration.addAnnotatedClass(Chat.class);
         configuration.addAnnotatedClass(UserChat.class);
+        configuration.addAnnotatedClass(Programmer.class);
+        configuration.addAnnotatedClass(Manager.class);
         return configuration;
     }
 }

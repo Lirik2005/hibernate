@@ -18,22 +18,22 @@ public class ManyToOneRunner {
                                 .name("Googleedse")
                                 .build();
 
-        User petr = User.builder()
-                        .userName("petr@gsdmailsds.com")
-                        .personalInfo(PersonalInfo.builder()
-                                                  .lastName("Petrodsvddd")
-                                                  .firstName("Pesdftrsd")
-                                                  .birthDate(new Birthday(LocalDate.of(2009, 3, 16)))
-                                                  .build())
-                        .company(google)
-                        .build();
+//        User petr = User.builder()
+//                        .userName("petr@gsdmailsds.com")
+//                        .personalInfo(PersonalInfo.builder()
+//                                                  .lastName("Petrodsvddd")
+//                                                  .firstName("Pesdftrsd")
+//                                                  .birthDate(new Birthday(LocalDate.of(2009, 3, 16)))
+//                                                  .build())
+//                        .company(google)
+//                        .build();
 
         try (SessionFactory sessionFactory = HibernateUtil.buildSessionFactory()) {
             try (Session session = sessionFactory.openSession()) {
                 session.beginTransaction();
 
                 session.persist(google);
-                session.persist(petr);
+           //     session.persist(petr);
 
                 session.getTransaction().commit();
             }

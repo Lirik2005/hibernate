@@ -16,17 +16,17 @@ public class OneToOneTest {
         @Cleanup Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        User user = User.builder()
-                        .userName("test24@gmail.com")
-                        .build();
+//        User user = User.builder()
+//                        .userName("test24@gmail.com")
+//                        .build();
 
         Profile profile = Profile.builder()
                                  .language("ru")
                                  .street("Street, 12")
                                  .build();
-        profile.setUser(user);
-
-        session.persist(user);
+//        profile.setUser(user);
+//
+//        session.persist(user);
         session.getTransaction().commit();
     }
 

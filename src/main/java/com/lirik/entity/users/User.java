@@ -1,5 +1,6 @@
 package com.lirik.entity.users;
 
+import com.lirik.entity.BaseEntity;
 import com.lirik.entity.chat.UserChat;
 import com.lirik.entity.companies.Company;
 import jakarta.persistence.AttributeOverride;
@@ -12,6 +13,8 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -34,7 +37,7 @@ import java.util.Set;
 @EqualsAndHashCode(of = "userName")
 @ToString(exclude = {"company", "profile", "userChats"})
 @AllArgsConstructor
-@Builder
+
 
 /**
  * Аннотация @Entity необходима для того, чтобы указать, что данный POJO-класс является сущностью Hibernate
@@ -44,9 +47,10 @@ import java.util.Set;
  * Также данный класс должен быть указан в файле hibernate.cfg.xml или в классе HibernateUtil
  */
 
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) // Так указывается стратегия наследования
 @Entity
 @Table(name = "users")
-public class User {
+public abstract class User implements BaseEntity<Long> {
 
     /**
      * Каждая сущность в Hibernate должна иметь первичный ключ. Для этого над полем, которое будет первичным ключом проставляется
@@ -61,7 +65,7 @@ public class User {
     @Id
 
     /**
-     * Аннотация @GeneratedValue нужна для генерации id и чтобы сказать hibernate, чтобы он не вставлял поле id в базу данных (иначе он
+     * Аннотация @GeneratedValue нужна для генерации id и чтобы сказать hibernate, чтобы он не вставлял поле id в базу данных иначе он
      * будет требовать, чтобы id был не null.
      * Есть несколько стратегий генерации id:
      * - GenerationType.AUTO - использует IDENTITY, SEQUENCE или TABLE. Зависит от СУБД и диалекта. У Postgres SQL это IDENTITY
@@ -69,7 +73,7 @@ public class User {
      * - GenerationType.SEQUENCE - аналог счетчика, который увеличивается на 1 при каждом вызове
      * - GenerationType.TABLE - жуткое legacy, которое использовали до создания IDENTITY и SEQUENCE
      */
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
 
@@ -120,10 +124,9 @@ public class User {
     @JoinColumn(name = "company_id") // Эта аннотация используется, чтобы указать по какой колонке идет маппинг
     private Company company;
 
-    @OneToOne(mappedBy = "userForMapping", cascade = CascadeType.ALL, fetch = FetchType.LAZY, optional = false)
+    @OneToOne(mappedBy = "userForMapping", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Profile profile;
 
-    @Builder.Default
     @OneToMany(mappedBy = "user")
     private Set<UserChat> userChats = new HashSet<>();
 }

@@ -24,8 +24,8 @@ public class ManyToManyTest {
         Chat chat = session.get(Chat.class, 1L);
 
         UserChat userChat = UserChat.builder()
-                                    .createdAt(Instant.now())
-                                    .createdBy(user.getUserName())
+//                                    .createdAt(Instant.now())
+//                                    .createdBy(user.getUserName())
                                     .build();
 
         userChat.setUser(user);

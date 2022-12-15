@@ -10,13 +10,13 @@ public class HibernateLifecycleRunner {
 
     public static void main(String[] args) {
 
-        User user = User.builder()  // В данной строке user не связан ни с одной из сессий и находится в состоянии transient
-                        .userName("petr@gmail.com")
-                        .personalInfo(PersonalInfo.builder()
-                                                  .lastName("Petrov")
-                                                  .firstName("Petr")
-                                                  .build())
-                        .build();
+//        User user = User.builder()  // В данной строке user не связан ни с одной из сессий и находится в состоянии transient
+//                        .userName("petr@gmail.com")
+//                        .personalInfo(PersonalInfo.builder()
+//                                                  .lastName("Petrov")
+//                                                  .firstName("Petr")
+//                                                  .build())
+//                        .build();
 
         /**
          * Некоторая информация по записям ниже также присутствует в моем классе HibernateRunner
@@ -26,7 +26,7 @@ public class HibernateLifecycleRunner {
             try (Session session1 = sessionFactory.openSession()) {
                 session1.beginTransaction();
 
-                session1.persist(user); // В данной строке user в состоянии persistent для session1 и в состоянии transient для session2
+  //              session1.persist(user); // В данной строке user в состоянии persistent для session1 и в состоянии transient для session2
 
                 session1.getTransaction().commit();
             }

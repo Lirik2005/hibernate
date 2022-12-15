@@ -21,11 +21,11 @@ public class AddAndDeleteCompanyTest {
                                   .name("Facebook")
                                   .build();
 
-        User sveta = User.builder()
-                         .userName("sveta@gmail.com")
-                         .build();
+//        User sveta = User.builder()
+//                         .userName("sveta@gmail.com")
+//                         .build();
 
-        facebook.addUser(sveta);
+    //    facebook.addUser(sveta);
 
         session.persist(facebook);
 

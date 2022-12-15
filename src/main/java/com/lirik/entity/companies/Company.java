@@ -56,8 +56,8 @@ public class Company {
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
 //    @JoinColumn(name = "company_id")
 //    @OrderBy("userName desc,  personalInfo.lastName asc")   //данная аннотация используется для сортировки
-    @MapKey(name = "userName") //  Необходима, чтобы указать, какое поле будет ключом
-    @SortNatural // сортирует мапу по ключу
+//    @MapKey(name = "userName") //  Необходима, чтобы указать, какое поле будет ключом
+//    @SortNatural // сортирует мапу по ключу
     private Map<String, User> users = new TreeMap<>();
 
     @Builder.Default

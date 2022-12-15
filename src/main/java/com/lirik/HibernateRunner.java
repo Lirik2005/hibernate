@@ -42,21 +42,21 @@ public class HibernateRunner {
              Session session = sessionFactory.openSession()) {
             session.beginTransaction();   // обязательно открываем транзакцию ВРУЧНУЮ и выполняем необходимы код
 
-            User user = User.builder()
-                            .userName("ivan@gmail.com")
-                            .personalInfo(PersonalInfo.builder()
-                                                      .lastName("Ivanov")
-                                                      .firstName("Ivan")
-                                                      .birthDate(new Birthday(LocalDate.of(2000, 1, 19)))
-                                                      .build())
-                            .info("""
-                                          {
-                                          "name": "Ivan",
-                                          "id": 25
-                                          }
-                                          """)
-                            .role(Role.ADMIN)
-                            .build();
+//            User user = User.builder()
+//                            .userName("ivan@gmail.com")
+//                            .personalInfo(PersonalInfo.builder()
+//                                                      .lastName("Ivanov")
+//                                                      .firstName("Ivan")
+//                                                      .birthDate(new Birthday(LocalDate.of(2000, 1, 19)))
+//                                                      .build())
+//                            .info("""
+//                                          {
+//                                          "name": "Ivan",
+//                                          "id": 25
+//                                          }
+//                                          """)
+//                            .role(Role.ADMIN)
+//                            .build();
 
             /**
              * Операции persist, merge, remove осуществляются по id юзера
