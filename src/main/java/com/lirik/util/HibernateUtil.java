@@ -3,6 +3,7 @@ package com.lirik.util;
 import com.lirik.entity.chat.Chat;
 import com.lirik.entity.chat.UserChat;
 import com.lirik.entity.companies.Company;
+import com.lirik.entity.users.Payment;
 import com.lirik.entity.users.Profile;
 import com.lirik.entity.users.User;
 import com.lirik.mapping.Manager;
@@ -35,6 +36,7 @@ public class HibernateUtil {
         configuration.addAnnotatedClass(UserChat.class);
         configuration.addAnnotatedClass(Programmer.class);
         configuration.addAnnotatedClass(Manager.class);
+        configuration.addAnnotatedClass(Payment.class);
         return configuration;
     }
 }

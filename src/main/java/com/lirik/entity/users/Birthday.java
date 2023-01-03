@@ -10,11 +10,17 @@ import java.time.temporal.ChronoUnit;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Birthday {
+public class Birthday implements Comparable<Birthday> {
 
     private LocalDate birthDate;
 
     public long getAge() {
         return ChronoUnit.YEARS.between(birthDate, LocalDate.now());
+    }
+
+
+    @Override
+    public int compareTo(Birthday o) {
+        return birthDate.compareTo(o.birthDate);
     }
 }

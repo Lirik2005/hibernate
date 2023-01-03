@@ -24,24 +24,24 @@ public class DockerBaseTest {
 
         session.persist(google);
 
-        Programmer programmer = Programmer.builder()
-                                          .userName("lirik2005@yandex.ru")
-                                          .language(Language.JAVA)
-                                          .company(google)
-                                          .build();
-        session.persist(programmer);
-
-        Manager manager = Manager.builder()
-                                 .userName("lirik@yandex.ru")
-                                 .company(google)
-                                 .build();
-        session.persist(manager);
-        session.flush();
-
-        session.clear();
-
-        Programmer programmer1 = session.get(Programmer.class, 1L);
-        User manager1 = session.get(User.class, 2L);
+//        Programmer programmer = Programmer.builder()
+//                                          .userName("lirik2005@yandex.ru")
+//                                          .language(Language.JAVA)
+//                                          .company(google)
+//                                          .build();
+//        session.persist(programmer);
+//
+//        Manager manager = Manager.builder()
+//                                 .userName("lirik@yandex.ru")
+//                                 .company(google)
+//                                 .build();
+//        session.persist(manager);
+//        session.flush();
+//
+//        session.clear();
+//
+//        Programmer programmer1 = session.get(Programmer.class, 1L);
+//        User manager1 = session.get(User.class, 2L);
 
         session.getTransaction().commit();
     }

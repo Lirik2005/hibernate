@@ -16,20 +16,20 @@ import lombok.NoArgsConstructor;
 
 import java.util.Set;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Entity
+//@Data
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@Entity
 public class Programmer extends User {
 
-    @Enumerated(EnumType.STRING)
-    private Language language;
+//    @Enumerated(EnumType.STRING)
+//    private Language language;
 
-    @Builder
-    public Programmer(Long id, String userName, PersonalInfo personalInfo, Role role, String info,
-                      Company company, Profile profile,
-                      Set<UserChat> userChats, Language language) {
-        super(id, userName, personalInfo, role, info, company, profile, userChats);
-        this.language = language;
-    }
+
+//    public Programmer(Long id, String userName, PersonalInfo personalInfo, Role role, String info,
+//                      Company company, Profile profile,
+//                      Set<UserChat> userChats, Language language) {
+//        super(id, userName, personalInfo, role, info, company, profile, userChats);
+//        this.language = language;
+//    }
 }

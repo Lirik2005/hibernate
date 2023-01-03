@@ -29,15 +29,17 @@ import lombok.ToString;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(of = "userName")
-@ToString(exclude = {"company", "profile", "userChats"})
+@ToString(exclude = {"company", "profile", "userChats", "payments"})
 @AllArgsConstructor
-
+@Builder
 
 /**
  * Аннотация @Entity необходима для того, чтобы указать, что данный POJO-класс является сущностью Hibernate
@@ -50,7 +52,7 @@ import java.util.Set;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS) // Так указывается стратегия наследования
 @Entity
 @Table(name = "users")
-public abstract class User implements BaseEntity<Long> {
+public class User implements Comparable<User>, BaseEntity<Long> {
 
     /**
      * Каждая сущность в Hibernate должна иметь первичный ключ. Для этого над полем, которое будет первичным ключом проставляется
@@ -127,6 +129,21 @@ public abstract class User implements BaseEntity<Long> {
     @OneToOne(mappedBy = "userForMapping", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Profile profile;
 
+    @Builder.Default
     @OneToMany(mappedBy = "user")
     private Set<UserChat> userChats = new HashSet<>();
+
+    @Builder.Default
+    @OneToMany(mappedBy = "receiver")
+    private List<Payment> payments = new ArrayList<>();
+
+
+    @Override
+    public int compareTo(User o) {
+        return userName.compareTo(o.userName);
+    }
+
+    public String fullName() {
+        return getPersonalInfo().getFirstName() + " " + getPersonalInfo().getLastName();
+    }
 }

@@ -30,6 +30,7 @@ dependencies {
 
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+    testImplementation 'org.assertj:assertj-core:3.21.0'
 
     implementation 'org.slf4j:slf4j-log4j12:2.0.3' // внутри есть транзитивная зависимость на slf4j, поэтому зависимость slf4j не нужна
 
