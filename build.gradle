@@ -16,7 +16,7 @@ java {
 
 dependencies {
     implementation 'org.hibernate:hibernate-core:6.1.3.Final'
-    runtimeOnly 'org.postgresql:postgresql:42.5.0'  // т.к. этот драйвер не нужен в compile фазе, поэтому ставим runtimeOnly
+    runtimeOnly 'org.postgresql:postgresql:42.5.1'  // т.к. этот драйвер не нужен в compile фазе, поэтому ставим runtimeOnly
 
     implementation 'com.fasterxml.jackson.core:jackson-databind:2.14.0-rc2' // надо для создания кастомных типов в виде JSON
 
@@ -37,6 +37,9 @@ dependencies {
 //    testImplementation 'com.h2database:h2:2.1.214' // данная зависимость нужна для создания подобия виртуальной базы (нам не надо СУБД)
 
     testImplementation 'org.testcontainers:postgresql:1.17.6' // нужна чтобы поднять базу в докере
+
+    annotationProcessor 'org.hibernate.orm:hibernate-jpamodelgen:6.1.3.Final'  // используем для помощи в criteria API (версия должна
+    // совпадать с версией hibernate)
 }
 
 test {

@@ -7,13 +7,12 @@ import lombok.NoArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
-import java.util.Collections;
 import java.util.List;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class UserDao {
+public class UserDaoHql {
 
-    private static final UserDao INSTANCE = new UserDao();
+    private static final UserDaoHql INSTANCE = new UserDaoHql();
 
     /**
      * Возвращает всех сотрудников
@@ -107,7 +106,7 @@ public class UserDao {
                       .list();
     }
 
-    public static UserDao getInstance() {
+    public static UserDaoHql getInstance() {
         return INSTANCE;
     }
 }

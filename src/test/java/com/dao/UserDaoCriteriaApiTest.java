@@ -1,10 +1,12 @@
 package com.dao;
 
-import com.lirik.dao.UserDao;
+import com.lirik.dao.UserDaoCriteriaApi;
+import com.lirik.dto.CompanyDto;
 import com.lirik.entity.users.Payment;
 import com.lirik.entity.users.User;
 import com.lirik.util.HibernateTestUtil;
 import com.lirik.util.TestDataImporter;
+import jakarta.persistence.Tuple;
 import lombok.Cleanup;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -20,10 +22,10 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS;
 
 @TestInstance(PER_CLASS)
-public class UserDaoTest {
+public class UserDaoCriteriaApiTest {
 
     SessionFactory sessionFactory = HibernateTestUtil.buildSessionFactory();
-    private final UserDao userDao = UserDao.getInstance();
+    private final UserDaoCriteriaApi userDao = UserDaoCriteriaApi.getInstance();
 
     @BeforeAll
     public void initDb() {
@@ -121,13 +123,13 @@ public class UserDaoTest {
         @Cleanup Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        List<Object[]> results = userDao.findCompanyNamesWithAvgUserPaymentsOrderedByCompanyName(session);
+        List<CompanyDto> results = userDao.findCompanyNamesWithAvgUserPaymentsOrderedByCompanyName(session);
         assertThat(results).hasSize(3);
 
-        List<String> orgNames = results.stream().map(a -> (String) a[0]).collect(toList());
+        List<String> orgNames = results.stream().map(CompanyDto::getName).collect(toList());
         assertThat(orgNames).contains("Apple", "Google", "Microsoft");
 
-        List<Double> orgAvgPayments = results.stream().map(a -> (Double) a[1]).collect(toList());
+        List<Double> orgAvgPayments = results.stream().map(CompanyDto::getAmount).collect(toList());
         assertThat(orgAvgPayments).contains(410.0, 400.0, 300.0);
 
         session.getTransaction().commit();
@@ -138,13 +140,13 @@ public class UserDaoTest {
         @Cleanup Session session = sessionFactory.openSession();
         session.beginTransaction();
 
-        List<Object[]> results = userDao.isItPossible(session);
+        List<Tuple> results = userDao.isItPossible(session);
         assertThat(results).hasSize(2);
 
-        List<String> names = results.stream().map(r -> ((User) r[0]).fullName()).collect(toList());
+        List<String> names = results.stream().map(r -> r.get(0, User.class).fullName()).collect(toList());
         assertThat(names).contains("Sergey Brin", "Steve Jobs");
 
-        List<Double> averagePayments = results.stream().map(r -> (Double) r[1]).collect(toList());
+        List<Double> averagePayments = results.stream().map(r -> r.get(1, Double.class)).collect(toList());
         assertThat(averagePayments).contains(500.0, 450.0);
 
         session.getTransaction().commit();
