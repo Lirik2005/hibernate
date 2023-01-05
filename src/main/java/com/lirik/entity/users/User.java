@@ -126,8 +126,8 @@ public class User implements Comparable<User>, BaseEntity<Long> {
     @JoinColumn(name = "company_id") // Эта аннотация используется, чтобы указать по какой колонке идет маппинг
     private Company company;
 
-    @OneToOne(mappedBy = "userForMapping", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Profile profile;
+//    @OneToOne(mappedBy = "userForMapping", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+//    private Profile profile;
 
     @Builder.Default
     @OneToMany(mappedBy = "user")
