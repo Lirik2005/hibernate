@@ -13,7 +13,9 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -33,6 +35,9 @@ public class Chat {
     private String name;
 
     @Builder.Default
+    private Integer count = 0;
+
+    @Builder.Default
     @OneToMany(mappedBy = "chat")
-    private Set<UserChat> userChats = new HashSet<>();
+    private List<UserChat> userChats = new ArrayList<>();
 }
