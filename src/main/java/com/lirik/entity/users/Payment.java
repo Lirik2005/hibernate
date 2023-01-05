@@ -1,5 +1,6 @@
 package com.lirik.entity.users;
 
+import com.lirik.entity.AuditableEntity;
 import com.lirik.entity.BaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -9,6 +10,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Version;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,13 +21,15 @@ import org.hibernate.annotations.OptimisticLockType;
 import org.hibernate.annotations.OptimisticLocking;
 import org.hibernate.annotations.Type;
 
+import java.time.Instant;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Entity
 @OptimisticLocking(type = OptimisticLockType.VERSION)
-public class Payment implements BaseEntity<Long> {
+public class Payment extends AuditableEntity<Long> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,4 +44,14 @@ public class Payment implements BaseEntity<Long> {
    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "receiver_id")
     private User receiver;
+
+   @PrePersist
+    public void prePersist() {
+       setCreatedAt(Instant.now());
+   }
+
+   @PreUpdate
+    public void preUpdate() {
+       setUpdatedAt(Instant.now());
+   }
 }
