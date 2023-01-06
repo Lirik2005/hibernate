@@ -15,6 +15,7 @@ import jakarta.persistence.OrderBy;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SortComparator;
 import org.hibernate.annotations.SortNatural;
@@ -32,6 +33,7 @@ import java.util.TreeMap;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+@EqualsAndHashCode(of = "name")
 @Entity
 public class Company {
 
@@ -53,7 +55,7 @@ public class Company {
      * в нее юзеров, которые также будут создаваться и записываться в таблицу
      */
     @Builder.Default
-    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
 //    @JoinColumn(name = "company_id")
 //    @OrderBy("userName desc,  personalInfo.lastName asc")   //данная аннотация используется для сортировки
 //    @MapKey(name = "userName") //  Необходима, чтобы указать, какое поле будет ключом

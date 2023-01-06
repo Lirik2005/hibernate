@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Entity
 @Table(name = "users_chat")
-@EqualsAndHashCode(callSuper = false)
+@EqualsAndHashCode(of = "id", callSuper=false)
 @EntityListeners(UserChatListener.class)
 public class UserChat extends AuditableEntity<Long> {
 

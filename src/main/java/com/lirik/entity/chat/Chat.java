@@ -23,7 +23,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Builder
 @EqualsAndHashCode(of = "name")
-@ToString(exclude = "userChats")
+//@ToString(exclude = "userChats")
 @Entity
 public class Chat {
 
