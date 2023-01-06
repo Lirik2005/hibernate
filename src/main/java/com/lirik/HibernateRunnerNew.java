@@ -1,6 +1,7 @@
 package com.lirik;
 
 import com.lirik.entity.users.Payment;
+import com.lirik.interceptor.GlobalInterceptor;
 import com.lirik.util.HibernateUtil;
 import com.lirik.util.TestDataImporter;
 import jakarta.transaction.Transactional;
@@ -15,7 +16,10 @@ public class HibernateRunnerNew {
     public static void main(String[] args) {
 
         try (SessionFactory sessionFactory = HibernateUtil.buildSessionFactory();
-             Session session = sessionFactory.openSession()) {
+             Session session = sessionFactory
+                     .withOptions()
+                     .interceptor(new GlobalInterceptor())
+                     .openSession()) {
             TestDataImporter.importData(sessionFactory);
             session.beginTransaction();
 

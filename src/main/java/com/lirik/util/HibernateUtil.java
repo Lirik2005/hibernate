@@ -7,6 +7,7 @@ import com.lirik.entity.companies.Company;
 import com.lirik.entity.users.Payment;
 import com.lirik.entity.users.Profile;
 import com.lirik.entity.users.User;
+import com.lirik.interceptor.GlobalInterceptor;
 import com.lirik.listener.AuditTableListener;
 import com.lirik.mapping.Manager;
 import com.lirik.mapping.Programmer;
@@ -36,12 +37,12 @@ public class HibernateUtil {
     }
 
     private static void registerListeners(SessionFactory sessionFactory) {
-        SessionFactoryImpl sessionFactoryImpl = sessionFactory.unwrap(SessionFactoryImpl.class);
-
-        EventListenerRegistry eventListenerRegistry = sessionFactoryImpl.getServiceRegistry().getService(EventListenerRegistry.class);
-        AuditTableListener auditTableListener = new AuditTableListener();
-        eventListenerRegistry.appendListeners(EventType.PRE_DELETE, auditTableListener);
-        eventListenerRegistry.appendListeners(EventType.PRE_INSERT, auditTableListener);
+//        SessionFactoryImpl sessionFactoryImpl = sessionFactory.unwrap(SessionFactoryImpl.class);
+//
+//        EventListenerRegistry eventListenerRegistry = sessionFactoryImpl.getServiceRegistry().getService(EventListenerRegistry.class);
+//        AuditTableListener auditTableListener = new AuditTableListener();
+//        eventListenerRegistry.appendListeners(EventType.PRE_DELETE, auditTableListener);
+//        eventListenerRegistry.appendListeners(EventType.PRE_INSERT, auditTableListener);
     }
 
     public static Configuration buldConfiguration() {
@@ -55,6 +56,7 @@ public class HibernateUtil {
         configuration.addAnnotatedClass(Manager.class);
         configuration.addAnnotatedClass(Payment.class);
         configuration.addAnnotatedClass(Audit.class);
+        configuration.setInterceptor(new GlobalInterceptor());
         return configuration;
     }
 }
