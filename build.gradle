@@ -40,6 +40,8 @@ dependencies {
 
     annotationProcessor 'org.hibernate.orm:hibernate-jpamodelgen:6.1.3.Final'  // используем для помощи в criteria API (версия должна
     // совпадать с версией hibernate)
+
+    implementation 'org.hibernate:hibernate-envers:6.1.3.Final'
 }
 
 test {

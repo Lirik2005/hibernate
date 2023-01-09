@@ -1,6 +1,7 @@
 package com.lirik.util;
 
 import com.lirik.entity.Audit;
+import com.lirik.entity.Revision;
 import com.lirik.entity.chat.Chat;
 import com.lirik.entity.chat.UserChat;
 import com.lirik.entity.companies.Company;
@@ -56,6 +57,7 @@ public class HibernateUtil {
         configuration.addAnnotatedClass(Manager.class);
         configuration.addAnnotatedClass(Payment.class);
         configuration.addAnnotatedClass(Audit.class);
+        configuration.addAnnotatedClass(Revision.class);
         configuration.setInterceptor(new GlobalInterceptor());
         return configuration;
     }

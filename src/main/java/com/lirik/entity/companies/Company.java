@@ -19,6 +19,8 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.SortComparator;
 import org.hibernate.annotations.SortNatural;
+import org.hibernate.envers.Audited;
+import org.hibernate.envers.NotAudited;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -35,6 +37,7 @@ import java.util.TreeMap;
 @Builder
 @EqualsAndHashCode(of = "name")
 @Entity
+@Audited
 public class Company {
 
     @Id
@@ -55,6 +58,7 @@ public class Company {
      * в нее юзеров, которые также будут создаваться и записываться в таблицу
      */
     @Builder.Default
+    @NotAudited
     @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
 //    @JoinColumn(name = "company_id")
 //    @OrderBy("userName desc,  personalInfo.lastName asc")   //данная аннотация используется для сортировки
@@ -63,6 +67,7 @@ public class Company {
     private Map<String, User> users = new TreeMap<>();
 
     @Builder.Default
+    @NotAudited
     @ElementCollection // Необходима для эмбедбл компонентов
     @CollectionTable(name = "company_locale")
     private List<LocaleInfo> locales = new ArrayList<>();

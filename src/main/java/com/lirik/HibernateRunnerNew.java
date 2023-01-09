@@ -1,13 +1,15 @@
 package com.lirik;
 
 import com.lirik.entity.users.Payment;
-import com.lirik.interceptor.GlobalInterceptor;
 import com.lirik.util.HibernateUtil;
-import com.lirik.util.TestDataImporter;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.envers.AuditReader;
+import org.hibernate.envers.AuditReaderFactory;
+
+import java.util.Date;
 
 @Slf4j
 public class HibernateRunnerNew {
@@ -15,18 +17,25 @@ public class HibernateRunnerNew {
     @Transactional  // управляет транзакцией, чтобы не обрабатывать exception
     public static void main(String[] args) {
 
-        try (SessionFactory sessionFactory = HibernateUtil.buildSessionFactory();
-             Session session = sessionFactory
-                     .withOptions()
-                     .interceptor(new GlobalInterceptor())
-                     .openSession()) {
-            TestDataImporter.importData(sessionFactory);
-            session.beginTransaction();
+        try (SessionFactory sessionFactory = HibernateUtil.buildSessionFactory()) {
 
-            Payment payment = session.find(Payment.class, 1L);
-            payment.setAmount(payment.getAmount() + 10);
+            try (Session session = sessionFactory.openSession()) {
+                session.beginTransaction();
 
-            session.getTransaction().commit();
+                Payment payment = session.find(Payment.class, 1L);
+                payment.setAmount(payment.getAmount() + 10);
+
+                session.getTransaction().commit();
+            }
+            try (Session session2 = sessionFactory.openSession()) {
+                session2.beginTransaction();
+
+                AuditReader auditReader = AuditReaderFactory.get(session2);
+                Payment oldPayment = auditReader.find(Payment.class, 2L, new Date(1672996251582L));
+                System.out.println();
+
+                session2.getTransaction().commit();
+            }
         }
     }
 }
