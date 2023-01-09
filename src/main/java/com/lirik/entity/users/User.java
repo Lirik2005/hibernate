@@ -26,6 +26,8 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
@@ -40,6 +42,7 @@ import java.util.Set;
 @ToString(exclude = {"company", "userChats", "payments"})
 @AllArgsConstructor
 @Builder
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)  // Аннотация нужна, чтобы кэшировать сущность
 
 /**
  * Аннотация @Entity необходима для того, чтобы указать, что данный POJO-класс является сущностью Hibernate
