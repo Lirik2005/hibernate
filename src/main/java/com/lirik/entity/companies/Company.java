@@ -1,5 +1,6 @@
 package com.lirik.entity.companies;
 
+import com.lirik.entity.BaseEntity;
 import com.lirik.entity.users.User;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
@@ -38,7 +39,7 @@ import java.util.TreeMap;
 @EqualsAndHashCode(of = "name")
 @Entity
 @Audited
-public class Company {
+public class Company implements BaseEntity<Integer> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -70,7 +71,7 @@ public class Company {
     @NotAudited
     @ElementCollection // Необходима для эмбедбл компонентов
     @CollectionTable(name = "company_locale")
-    private List<LocaleInfo> locales = new ArrayList<>();
+    private Map<String, String> locales = new HashMap<>();
 
     public void addUser(User user) {
         users.put(user.getUserName(), user);

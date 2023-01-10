@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS;
 
 @TestInstance(PER_CLASS)
-public class UserDaoHqlTest {
+public class UserRepositoryHqlTest {
 
     SessionFactory sessionFactory = HibernateTestUtil.buildSessionFactory();
     private final UserDaoHql userDaoHql = UserDaoHql.getInstance();

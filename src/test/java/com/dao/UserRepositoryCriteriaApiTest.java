@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS;
 
 @TestInstance(PER_CLASS)
-public class UserDaoCriteriaApiTest {
+public class UserRepositoryCriteriaApiTest {
 
     SessionFactory sessionFactory = HibernateTestUtil.buildSessionFactory();
     private final UserDaoCriteriaApi userDao = UserDaoCriteriaApi.getInstance();
